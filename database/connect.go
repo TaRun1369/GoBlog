@@ -31,5 +31,6 @@ func Connect() {
 
 	database.AutoMigrate(
 		&models.User{}, // migrate user model from user.go in models ka user struct 
+		&models.Blog{},
 	)
 }

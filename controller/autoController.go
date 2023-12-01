@@ -11,6 +11,7 @@ import (
 	"github.com/TaRun1369/GoBlog/database"
 	"github.com/TaRun1369/GoBlog/models"
 	"github.com/TaRun1369/GoBlog/util"
+	"github.com/dgrijalva/jwt-go"
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -107,18 +108,25 @@ func Login(c *fiber.Ctx) error {
 	// c.Cookie is used to set the cookie
 	// cookie is used to store the data in the browser
 	cookie := fiber.Cookie{
-		Name:     "jwt", // name of the cookie
-		Value:    token, // value of the cookie as token because we are storing the token in the cookie
-		// use of token in cookie is that we can access the token from the frontend 
+		Name:  "jwt", // name of the cookie
+		Value: token, // value of the cookie as token because we are storing the token in the cookie
+		// use of token in cookie is that we can access the token from the frontend
 		// and we can use the token for authentication
-		Expires:   time.Now().Add(time.Hour * 24), // expires after 24 hours
-		HTTPOnly: true, // http only is used to make the cookie accessible only by the http protocol
+		Expires:  time.Now().Add(time.Hour * 24), // expires after 24 hours
+		HTTPOnly: true,                           // http only is used to make the cookie accessible only by the http protocol
 	}
 
 	c.Cookie(&cookie)
 	return c.JSON(fiber.Map{
 		"message": "Login Successful",
-		"user":user,
-
+		"user":    user,
 	})
 }
+
+type Claims struct {
+	
+// here we create struct for payload 
+	jwt.StandardClaims
+}
+// type is used to create a new datatype 
+// Claims is the type of the struct
