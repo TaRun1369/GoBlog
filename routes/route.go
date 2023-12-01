@@ -6,5 +6,6 @@ import (
 )
 
 func Setup(app *fiber.App) {
-	app.Post("/api/register", controller.Register)
+	app.Post("/api/register", controller.Register) // Register is the function in controller
+	
 }

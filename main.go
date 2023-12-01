@@ -19,6 +19,6 @@ func main() {
 
 	port := os.Getenv("PORT") // get port from env
 	app := fiber.New()        // using fiber framework which is similar to express, fiber used for routing , routing means which url will go to which function
-	routes.Setup()
+	routes.Setup(app)
 	app.Listen(":" + port) // Listen function is used to listen to the port
 }
