@@ -1,7 +1,6 @@
 package controller
 
 import (
-	// "errors"
 	"fmt"
 	"math"
 	"strconv"
@@ -10,7 +9,6 @@ import (
 	"github.com/TaRun1369/GoBlog/models"
 	"github.com/TaRun1369/GoBlog/util"
 	"github.com/gofiber/fiber/v2"
-	// "gorm.io/gorm"
 )
 
 func CreatePost(c *fiber.Ctx) error {
@@ -96,37 +94,37 @@ func UpdatePost(c *fiber.Ctx) error {
 	})
 }
 
-// func UniquePost(c *fiber.Ctx) error{
-// 	cookie:=c.Cookies("jwt")
-// 	id,_:=util.ParseJwt(cookie)
-// 	var blog models.Blog
-// 	database.DB.Model(&blog).Where("userid=?",id).Preload("User").First(&blog)
-// 	return c.JSON(blog)
-// }
-
-// ye work nhi karta pata nhi kyuuuuuuuuuu
 func UniquePost(c *fiber.Ctx) error {
 	cookie := c.Cookies("jwt")
-	id, err := util.ParseJwt(cookie)
-	if err != nil {
-		return c.Status(400).JSON(fiber.Map{
-			"error": "Invalid JWT token",
-		})
-	}
-
+	id, _ := util.ParseJwt(cookie)
 	var blog models.Blog
-	result := database.DB.Model(&blog).Where("userid=?", id).Preload("User").First(&blog)
-	if result.Error != nil {
-		return c.Status(404).JSON(fiber.Map{
-			"error": "Post not found",
-		})
-	}
-
+	database.DB.Model(&blog).Where("userid=?", id).Preload("User").Find(&blog)
 	return c.JSON(blog)
 }
 
+// ye work nhi karta pata nhi kyuuuuuuuuuu
+// func UniquePost(c *fiber.Ctx) error {
+// 	cookie := c.Cookies("jwt")
+// 	id, err := util.ParseJwt(cookie)
+// 	if err != nil {
+// 		return c.Status(400).JSON(fiber.Map{
+// 			"error": "Invalid JWT token",
+// 		})
+// 	}
+
+// 	var blog models.Blog
+// 	result := database.DB.Model(&blog).Where("userid=?", id).Preload("User").First(&blog)
+// 	if result.Error != nil {
+// 		return c.Status(404).JSON(fiber.Map{
+// 			"error": "Post not found",
+// 		})
+// 	}
+
+// 	return c.JSON(blog)
+// }
+
 // func DeletePost(c *fiber.Ctx) error {
-// 	id, _ := strconv.Atoi(c.Params("id"))
+// 	id,_:= strconv.Atoi(c.Params("id"))
 // 	blog := models.Blog{
 // 		Id: uint(id),
 // 	}
