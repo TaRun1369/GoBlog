@@ -5,6 +5,7 @@ type Blog struct {
 	Title  string `json:title`
 	Desc   string `json:desc`
 	Image  string `json:image`
-	UserID string `json:userid`
-	User   User   `json:"user";gorm:"foreignKey:UserID"`
+	UserID uint   `json:userid`
+	// fix this id should be user id that of the user which is logged in
+	User User `json:"user";gorm:"foreignKey:UserID"`
 }

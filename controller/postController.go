@@ -12,7 +12,11 @@ import (
 )
 
 func CreatePost(c *fiber.Ctx) error {
+	fmt.Println("CreatePost")
+
 	var blogpost models.Blog
+	// print id of user from body
+	fmt.Println(blogpost.UserID)
 	if err := c.BodyParser(&blogpost); err != nil { // BodyParser is used to parse the data from the body
 		fmt.Println("Unable to parse json or body")
 	}
