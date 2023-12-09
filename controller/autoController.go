@@ -113,7 +113,7 @@ func Login(c *fiber.Ctx) error {
 		// use of token in cookie is that we can access the token from the frontend
 		// and we can use the token for authentication
 		Expires:  time.Now().Add(time.Hour * 24), // expires after 24 hours
-		HTTPOnly: true,                           // http only is used to make the cookie accessible only by the http protocol
+		HTTPOnly: false,                          // http only is used to make the cookie accessible only by the http protocol
 	}
 
 	c.Cookie(&cookie)
@@ -124,9 +124,10 @@ func Login(c *fiber.Ctx) error {
 }
 
 type Claims struct {
-	
-// here we create struct for payload 
+
+	// here we create struct for payload
 	jwt.StandardClaims
 }
-// type is used to create a new datatype 
+
+// type is used to create a new datatype
 // Claims is the type of the struct
