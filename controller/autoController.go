@@ -112,7 +112,7 @@ func Login(c *fiber.Ctx) error {
 		Value: token, // value of the cookie as token because we are storing the token in the cookie
 		// use of token in cookie is that we can access the token from the frontend
 		// and we can use the token for authentication
-		Expires:  time.Now().Add(time.Hour * 24) // expires after 24 hours
+		Expires:  time.Now().Add(time.Hour * 24), // expires after 24 hours
 		                        // http only is used to make the cookie accessible only by the http protocol
 	}
 
